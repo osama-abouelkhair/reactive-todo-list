@@ -26,6 +26,13 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webflux</artifactId>
+			<exclusions>
+				<!-- Exclude the Netty dependency -->
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-reactor-netty</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
