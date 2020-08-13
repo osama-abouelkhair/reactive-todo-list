@@ -1,6 +1,7 @@
 package com.reactive.reactive.todo.list.model;
 
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 import lombok.AllArgsConstructor;
@@ -20,7 +21,7 @@ public class TodoList {
     @Id
     private Long id;
     @Column
-    private UUID uuid;
+    private UUID uuid = UUID.randomUUID();
     @Column
     private String title;
 

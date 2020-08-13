@@ -1,13 +1,14 @@
 package com.reactive.reactive.todo.list.controllers;
 
+import com.reactive.reactive.todo.list.list.creation.ListCreation;
+import com.reactive.reactive.todo.list.list.creation.TodoListCreationRequest;
+import com.reactive.reactive.todo.list.list.creation.TodoListCreationResponse;
 import com.reactive.reactive.todo.list.model.TodoList;
 import com.reactive.reactive.todo.list.repositories.TodoListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.UUID;
 
@@ -19,8 +20,26 @@ public class TodoListController {
     @Autowired
     TodoListRepository todoListRepository;
 
+    @Autowired
+    ListCreation listCreation;
+
+    @GetMapping
+    private Flux<TodoList> getAllLists() {
+        return todoListRepository.findAll();
+    }
+
     @GetMapping("/{id}")
-    private Flux<TodoList> getEmployeeById(@PathVariable UUID id) {
+    private Mono<TodoList> getListById(@PathVariable UUID id) {
         return todoListRepository.findByUuid(id);
+    }
+
+    @PostMapping
+    private Mono<TodoListCreationResponse> addList(@RequestBody TodoListCreationRequest todoListDTO) {
+        return listCreation.create(todoListDTO);
+    }
+
+    @DeleteMapping("/{id}")
+    private Mono<Void> deleteList(@PathVariable UUID id) {
+        return todoListRepository.deleteByUuid(id);
     }
 }

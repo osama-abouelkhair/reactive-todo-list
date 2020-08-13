@@ -19,10 +19,5 @@ public class ReactiveTodoListApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("start,,,,");
-		try {
-
-			todoListRepository.findAll().toIterable().forEach(System.out::println);
-		} catch (Exception e) {}
 	}
 }
