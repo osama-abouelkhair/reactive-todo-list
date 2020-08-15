@@ -3,6 +3,9 @@ package com.reactive.reactive.todo.list.controllers;
 import com.reactive.reactive.todo.list.list.creation.ListCreation;
 import com.reactive.reactive.todo.list.list.creation.TodoListCreationRequest;
 import com.reactive.reactive.todo.list.list.creation.TodoListCreationResponse;
+import com.reactive.reactive.todo.list.list.manipulation.ListManipulation;
+import com.reactive.reactive.todo.list.list.manipulation.TodoListManipulationRequest;
+import com.reactive.reactive.todo.list.list.manipulation.TodoListManipulationResponse;
 import com.reactive.reactive.todo.list.model.TodoList;
 import com.reactive.reactive.todo.list.repositories.TodoListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +26,9 @@ public class TodoListController {
     @Autowired
     ListCreation listCreation;
 
+    @Autowired
+    ListManipulation listManipulation;
+
     @GetMapping
     private Flux<TodoList> getAllLists() {
         return todoListRepository.findAll();
@@ -41,5 +47,10 @@ public class TodoListController {
     @DeleteMapping("/{id}")
     private Mono<Void> deleteList(@PathVariable UUID id) {
         return todoListRepository.deleteByUuid(id);
+    }
+
+    @PutMapping
+    private Mono<TodoListManipulationResponse> edit(@RequestBody TodoListManipulationRequest todoListManipulationRequest) {
+        return listManipulation.edit(todoListManipulationRequest);
     }
 }

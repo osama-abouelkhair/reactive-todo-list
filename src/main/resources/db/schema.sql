@@ -3,3 +3,9 @@ CREATE TABLE IF NOT EXISTS todo_list(
     uuid UUID NOT NULL,
     title VARCHAR(255) NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS action(
+    id SERIAL PRIMARY KEY,
+    description VARCHAR(255) NOT NULL,
+    list_id INTEGER NOT NULL
+);
