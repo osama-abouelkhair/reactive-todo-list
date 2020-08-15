@@ -5,7 +5,6 @@ import com.reactive.reactive.todo.list.list.creation.TodoListCreationResponse;
 import com.reactive.reactive.todo.list.list.manipulation.ActionDTO;
 import com.reactive.reactive.todo.list.list.manipulation.TodoListManipulationRequest;
 import com.reactive.reactive.todo.list.list.manipulation.TodoListManipulationResponse;
-import com.reactive.reactive.todo.list.model.Action;
 import com.reactive.reactive.todo.list.model.TodoList;
 import com.reactive.reactive.todo.list.repositories.TodoListRepository;
 import org.junit.jupiter.api.BeforeEach;
